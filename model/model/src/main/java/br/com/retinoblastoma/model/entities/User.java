@@ -7,10 +7,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Data
+@Builder
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "users")
 public class User {
