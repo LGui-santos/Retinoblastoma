@@ -20,7 +20,9 @@ public class UserService {
 
 	public UserDto saveUser(UserDto userDto) {
 
-		userDto.setRole("Usuário");
+		if (userDto.getRole() == null || userDto.getRole().isEmpty()) {
+			userDto.setRole("Usuário");
+		}
 		User user = UserMapper.toUser(userDto);
 		User userSaved = userRepository.save(user);
 		return UserMapper.toUserDto(userSaved);
