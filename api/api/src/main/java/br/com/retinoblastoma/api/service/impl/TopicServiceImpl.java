@@ -1,9 +1,11 @@
-package br.com.retinoblastoma.api.service;
+package br.com.retinoblastoma.api.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.retinoblastoma.api.mapper.TopicMapper;
 import br.com.retinoblastoma.api.repository.TopicRepository;
@@ -14,7 +16,8 @@ import br.com.retinoblastoma.model.entities.Topic;
 import br.com.retinoblastoma.model.entities.User;
 
 @Service
-public class TopicService {
+@Transactional
+public class TopicServiceImpl {
 
 	@Autowired
 	private TopicRepository topicRepository;
@@ -38,4 +41,18 @@ public class TopicService {
 		return TopicMapper.toResponseDtoList(topics);
 	}
 
+	public TopicResponseDto getById(Long id) {
+		Topic topic = topicRepository.getReferenceById(id);
+		return TopicMapper.toResponseDto(topic);
+	}
+
+	public Boolean deleteById(Long id) {
+
+		Optional<Topic> optionalTopic = topicRepository.findById(id);
+		if (optionalTopic.get() != null) {
+			topicRepository.deleteById(id);
+			return true;
+		}
+		return false;
+	}
 }

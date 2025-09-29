@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserDto {
+public class DoctorDto {
 
 	private Long id;
 	@NotBlank
@@ -30,9 +30,11 @@ public class UserDto {
 	@NotBlank
 	@Size(min = 6, max = 20)
 	private String password;
+	@NotBlank
 	private String role;
+	@NotBlank
 	private String crm;
+	@NotBlank
 	private String specialty;
 
-	private String token;
 }

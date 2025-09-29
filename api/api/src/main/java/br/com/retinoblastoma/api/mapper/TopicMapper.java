@@ -18,26 +18,31 @@ public class TopicMapper {
 				.content(topicRequestDto.getContent())
 				.author(user)
 				.creationDate(LocalDateTime.now())
+				.image(topicRequestDto.getImage())
 				.build();
 	}
 
 	public static TopicResponseDto toResponseDto(Topic topic) {
 		List<ResponseDto> responses = topic.getResponses() != null ? topic.getResponses()
 				.stream()
-				.map(
-						response -> new ResponseDto(
-								response.getId(),
-								response.getContent(),
-								response.getAuthor().getName(),
-								response.getCreationDate().toString()))
+				.map(response -> new ResponseDto(
+						response.getId(),
+						response.getContent(),
+						response.getAuthor().getId(),
+						response.getAuthor().getName(),
+						response.getTopic().getId(),
+						response.getCreationDate(),
+						response.getImage()))
 				.toList() : List.of();
 
 		return TopicResponseDto.builder()
 				.id(topic.getId())
 				.title(topic.getTitle())
 				.content(topic.getContent())
-				.authorName(topic.getAuthor().getName())
+				.author(topic.getAuthor().getName())
+				.userId(topic.getAuthor().getId())
 				.creationDate(topic.getCreationDate())
+				.image(topic.getImage())
 				.responses(responses)
 				.build();
 	}
@@ -48,23 +53,26 @@ public class TopicMapper {
 		for (Topic topic : topics) {
 			List<ResponseDto> responses = topic.getResponses() != null ? topic.getResponses()
 					.stream()
-					.map(
-							response -> new ResponseDto(
-									response.getId(),
-									response.getContent(),
-									response.getAuthor().getName(),
-									response.getCreationDate().toString()))
+					.map(response -> new ResponseDto(
+							response.getId(),
+							response.getContent(),
+							response.getAuthor().getId(),
+							response.getAuthor().getName(),
+							response.getTopic().getId(),
+							response.getCreationDate(),
+							response.getImage()))
 					.toList() : List.of();
 
-			topicResponseDtos.add(
-					TopicResponseDto.builder()
-							.id(topic.getId())
-							.title(topic.getTitle())
-							.content(topic.getContent())
-							.authorName(topic.getAuthor().getName())
-							.creationDate(topic.getCreationDate())
-							.responses(responses)
-							.build());
+			topicResponseDtos.add(TopicResponseDto.builder()
+					.id(topic.getId())
+					.title(topic.getTitle())
+					.content(topic.getContent())
+					.author(topic.getAuthor().getName())
+					.userId(topic.getAuthor().getId())
+					.image(topic.getImage())
+					.creationDate(topic.getCreationDate())
+					.responses(responses)
+					.build());
 		}
 
 		return topicResponseDtos;

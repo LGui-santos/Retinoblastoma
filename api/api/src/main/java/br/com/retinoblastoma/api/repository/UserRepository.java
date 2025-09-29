@@ -6,4 +6,6 @@ import br.com.retinoblastoma.model.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	User findByUsernameAndPassword(String name, String password);
+
 }

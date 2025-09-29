@@ -16,11 +16,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Topic {
 
@@ -36,9 +41,12 @@ public class Topic {
 	@JoinColumn(name = "user_id")
 	private User author;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
-	private LocalDateTime creationDate = LocalDateTime.now();
+	private LocalDateTime creationDate;
 
 	@OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
+	@OrderBy("creationDate ASC") // ou DESC para mais recentes primeiro
 	private List<Response> responses = new ArrayList<>();
+
+	private byte[] image;
 
 }
