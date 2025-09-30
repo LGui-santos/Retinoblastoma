@@ -1,79 +1,151 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
+	<meta charset="UTF-8">
+	<title>Retinoblastoma</title>
 
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta charset="UTF-8">
-<title>App</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-<script src="/resources/js/jquery/jquery-3.4.1.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 
-<link href="/resources/css/styles.css" rel="stylesheet" />
-<link href="/resources/css/datatables/dataTables.bootstrap4.min.css"
-	rel="stylesheet" />
-<script src="/resources/js/font-awesome/all.min.js"></script>
+	<!-- DataTables CSS (Bootstrap 5) -->
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css">
 
+	<link href="/resources/css/styles.css" rel="stylesheet" />
+
+	<script src="/resources/js/font-awesome/all.min.js"></script>
+
+	<style>
+		/* Corrigir layout sidebar e conteúdo */
+		#layoutSidenav {
+			display: flex !important;
+			min-height: 100vh;
+		}
+
+		#layoutSidenav_nav {
+			flex: 0 0 225px !important;
+			width: 225px;
+			z-index: 1;
+		}
+
+		#layoutSidenav_content {
+			flex: 1 1 auto !important;
+			min-width: 0;
+			width: 100% !important;
+		}
+
+		/* Garantir que container-fluid não ultrapasse limites */
+		.container-fluid {
+			width: 100%;
+			max-width: 100%;
+			padding-right: 15px;
+			padding-left: 15px;
+		}
+
+		/* Responsivo */
+		@media (max-width: 991px) {
+			#layoutSidenav_nav {
+				display: none;
+			}
+		}
+	</style>
 </head>
+
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<a class="navbar-brand" th:href="@{/}">App</a>
-		<button class="btn btn-link btn-sm order-1 order-lg-0"
-			id="sidebarToggle" href="#">
+		<a class="navbar-brand" th:href="@{/}">Retinoblastoma</a>
+		<button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
 			<i class="fas fa-bars"></i>
 		</button>
 
+		<!-- Botões de cadastro -->
+		<ul class="navbar-nav ml-3">
+			<li class="nav-item" sec:authorize="!isAuthenticated()">
+				<a class="btn btn-outline-light btn-sm mr-2" th:href="@{/account/register}">
+					Cadastro Usuário
+				</a>
+			</li>
+			<li class="nav-item" sec:authorize="!isAuthenticated()">
+				<a class="btn btn-outline-info btn-sm" th:href="@{/account/register-doctor}">
+					Cadastro Médico
+				</a>
+			</li>
+		</ul>
+
 		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text"
-					placeholder="Procurar por..." aria-label="Search"
-					aria-describedby="basic-addon2" />
-				<div class="input-group-append">
-					<button class="btn btn-primary" type="button">
-						<i class="fas fa-search"></i>
-					</button>
-				</div>
-			</div>
+		<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+			<div class="input-group"></div>
 		</form>
 
 		<!-- Navbar-->
 		<ul class="navbar-nav ml-auto ml-md-0">
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" id="userDropdown" href="#"
-				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"> <i class="fas fa-user fa-fw"></i>
-			</a>
-				<div class="dropdown-menu dropdown-menu-right"
-					aria-labelledby="userDropdown">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle d-flex align-items-center" id="userDropdown" href="#" role="button"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-					<div th:if="${user != null}" sec:authorize="isAuthenticated()">
-						<a class="dropdown-item" th:href="@{/user/my-profile}">Perfil</a>
-
+					<!-- Avatar do usuário logado -->
+					<div sec:authorize="isAuthenticated()" class="d-flex align-items-center">
+						<div class="user-avatar me-2">
+							<i class="far fa-user-circle fa-lg"></i>
+						</div>
+						<span class="d-none d-md-inline text-light" th:text="${#authentication.principal.usuario.name}">
+							Nome do Usuário
+						</span>
 					</div>
 
-					<div sec:authorize="!isAuthenticated()">
-						<a class="dropdown-item" th:href="@{/account/login-page}">Entrar</a>
+					<!-- Ícone para usuário não logado -->
+					<div sec:authorize="!isAuthenticated()" class="d-flex align-items-center">
+						<div class="user-avatar me-2">
+							<i class="far fa-user fa-lg"></i>
+						</div>
+						<span class="d-none d-md-inline text-light">Entrar</span>
 					</div>
+				</a>
 
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+					<!-- Menu para usuário logado -->
 					<div sec:authorize="isAuthenticated()">
+						<div class="dropdown-header d-flex align-items-center">
+							<i class="far fa-user-circle fa-2x me-2"></i>
+							<div>
+								<div class="fw-bold" th:text="${#authentication.principal.usuario.name}">
+									Nome do Usuário
+								</div>
+								<small class="text-muted" th:text="${#authentication.principal.usuario.email}">
+									email@exemplo.com
+								</small>
+							</div>
+						</div>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/logout}">Sair</a>
-
+						<a class="dropdown-item" th:href="@{/user/my-profile}">
+							<i class="fas fa-user-edit me-2"></i>Meu Perfil
+						</a>
+						<div class="dropdown-divider"></div>
+						<form th:action="@{/logout}" method="post" style="display:inline;">
+							<button type="submit" class="dropdown-item text-danger">
+								<i class="fas fa-sign-out-alt me-2"></i>Sair
+							</button>
+						</form>
 					</div>
 
-				</div></li>
+					<!-- Menu para usuário não logado -->
+					<div sec:authorize="!isAuthenticated()">
+						<a class="dropdown-item" th:href="@{/account/login-page}">
+							<i class="fas fa-sign-in-alt me-2"></i>Fazer Login
+						</a>
+					</div>
+				</div>
+			</li>
 		</ul>
 	</nav>
+
 	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark"
-				id="sidenavAccordion">
+			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">Menu</div>
@@ -82,110 +154,56 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> Home
-						</a> <a class="nav-link" th:href="@{/weather/todays-weather}">
+						</a>
+						<a class="nav-link" th:href="@{/forum/topics}">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
-							</div> Tempo de hoje
+							</div> Fórum
 						</a>
-						<div class="sb-sidenav-menu-heading">Opções</div>
-
-						<a class="nav-link collapsed" href="#" data-toggle="collapse"
-							data-target="#collapseUsers" aria-expanded="false">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-book-open"></i>
-							</div> Usuários
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseUsers"
-							aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-
-								<a class="nav-link" th:href="@{/user/list}">Listar</a>
-							</nav>
-						</div>
-
-						<div sec:authorize="isAuthenticated()">
-							<a class="nav-link collapsed" href="#" data-toggle="collapse"
-								data-target="#collapseGames" aria-expanded="false">
-								<div class="sb-nav-link-icon">
-									<i class="fas fa-book-open"></i>
-								</div> Jogos
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fas fa-angle-down"></i>
-								</div>
-							</a>
-						</div>
-						<div class="collapse" id="collapseGames"
-							aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-
-								<div sec:authorize="hasRole('USUARIO')">
-									<a class="nav-link" th:href="@{/game/list}">Listar</a>
-
-								</div>
-
-								<div sec:authorize="hasRole('ADMINISTRADOR')">
-									<a class="nav-link" th:href="@{/game/edit}">Editar</a> <a
-										class="nav-link" th:href="@{/game/create}">Criar</a> <a
-										class="nav-link" th:href="@{/game/detail}">Detalhes</a> <a
-										class="nav-link" th:href="@{/game/list}">Listar</a>
-
-								</div>
-							</nav>
-						</div>
-					</div>
-					<a class="nav-link collapsed" href="#" data-toggle="collapse"
-						data-target="#collapseAccount" aria-expanded="false">
-						<div class="sb-nav-link-icon">
-							<i class="fas fa-book-open"></i>
-						</div> Conta
-						<div class="sb-sidenav-collapse-arrow">
-							<i class="fas fa-angle-down"></i>
-						</div>
-					</a>
-					<div class="collapse" id="collapseAccount"
-						aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-						<nav class="sb-sidenav-menu-nested nav">
-							<a class="nav-link" th:href="@{/account/register}">Criar
-								conta</a> <a class="nav-link" th:href="@{/account/login-page}">Login</a>
-							<a class="nav-link" th:href="@{/account/password-recovery}">Recuperar
-								senha</a> <a class="nav-link" th:href="@{/not-found}">Nao
-								encontrado</a>
-						</nav>
 					</div>
 				</div>
+				<div class="sb-sidenav-footer">
+					<div class="small">Logado como:</div>
+					Tiburssinho
+				</div>
+			</nav>
 		</div>
-		<div class="sb-sidenav-footer">
-			<div class="small">Logado como:</div>
-			Tiburssinho
-		</div>
-		</nav>
-	</div>
 
-	<div id="layoutSidenav_content">
-		<main>
-			<div layout:fragment="body"></div>
-		</main>
-		<footer class="py-4 bg-light mt-auto">
-			<div class="container-fluid">
-				<div class="d-flex align-items-center justify-content-between small">
-					<div class="text-muted">Copyright &copy; FAI - 2020</div>
-					<div>
-						<a href="#">Política de privacidade</a> &middot; <a href="#">Termos
-							&amp; Condições</a>
+		<div id="layoutSidenav_content">
+			<main>
+				<div layout:fragment="body"></div>
+			</main>
+			<footer class="py-4 bg-light mt-auto">
+				<div class="container-fluid">
+					<div class="d-flex align-items-center justify-content-between small">
+						<div class="text-muted">Copyright &copy; FAI - 2025</div>
+						<div>
+							<a href="#">Política de privacidade</a> &middot;
+							<a href="#">Termos &amp; Condições</a>
+						</div>
 					</div>
 				</div>
-			</div>
-		</footer>
+			</footer>
+		</div>
 	</div>
-	</div>
-	<script src="/resources/js/bootstrap/bootstrap.bundle.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 	<script src="/resources/js/scripts.js"></script>
-	<script src="/resources/js/datatable/jquery.dataTables.min.js"></script>
-	<script src="/resources/js/datatable/dataTables.bootstrap4.min.js"></script>
-	<script src="/resources/assets/demo/datatables-init.js"></script>
+
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$('#minhaTabela').DataTable();
+			// Adicione aqui a inicialização do SB Admin se o scripts.js não fizer isso
+		});
+	</script>
 </body>
 
 </html>

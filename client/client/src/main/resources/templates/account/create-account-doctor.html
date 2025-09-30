@@ -47,7 +47,24 @@
 										aria-describedby="emailHelp" placeholder="Insira o endereço de email"
 										th:field="${userDto.email}" />
 								</div>
-								
+								<div class="form-row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="small mb-1" for="inputPassword">CRM</label><input
+												class="form-control py-4" id="CRM" type="text"
+												placeholder="Insira o crm" th:field="${userDto.crm}" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="small mb-1"
+												for="inputConfirmPassword">Especialidade</label><input
+												class="form-control py-4" id="especiality" type="text"
+												placeholder="Insira a especialidade"
+												th:field="${userDto.specialty}" />
+										</div>
+									</div>
+								</div>
 								<div class="form-row">
 									<div class="col-md-6">
 										<div class="form-group">

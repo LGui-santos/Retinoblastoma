@@ -1,24 +1,403 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
 <head>
-<meta charset="UTF-8">
-<title>Home</title>
+	<meta charset="UTF-8">
+	<title>Retinoblastoma - Informações e Suporte</title>
+	<style>
+		.hero-section {
+			background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+			padding: 60px 0;
+			margin: -20px -15px 40px -15px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.hero-section::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 400px;
+			height: 400px;
+			background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e8f4fd"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+			opacity: 0.08;
+			z-index: 1;
+		}
+
+		.hero-content {
+			position: relative;
+			z-index: 2;
+			text-align: center;
+		}
+
+		.hero-title {
+			font-size: 3rem;
+			font-weight: 300;
+			color: #2c3e50;
+			margin-bottom: 20px;
+		}
+
+		.hero-subtitle {
+			font-size: 1.2rem;
+			color: #666;
+			margin-bottom: 30px;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+			line-height: 1.6;
+		}
+
+		.info-cards {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 30px;
+			margin: 40px 0;
+		}
+
+		.info-card {
+			background: white;
+			border-radius: 12px;
+			padding: 30px;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+			transition: all 0.3s ease;
+			border-left: 4px solid #0066cc;
+		}
+
+		.info-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+		}
+
+		.info-card h3 {
+			color: #2c3e50;
+			margin-bottom: 15px;
+			font-size: 1.4rem;
+			font-weight: 500;
+		}
+
+		.info-card p {
+			color: #666;
+			line-height: 1.7;
+			margin-bottom: 15px;
+		}
+
+		.info-card .icon {
+			font-size: 2.5rem;
+			color: #0066cc;
+			margin-bottom: 15px;
+		}
+
+		.stats-section {
+			background: #f8f9fa;
+			border-radius: 12px;
+			padding: 40px;
+			margin: 40px 0;
+			text-align: center;
+		}
+
+		.stats-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 30px;
+			margin-top: 30px;
+		}
+
+		.stat-item {
+			padding: 20px;
+		}
+
+		.stat-number {
+			font-size: 2.5rem;
+			font-weight: 700;
+			color: #0066cc;
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		.stat-label {
+			color: #666;
+			font-size: 0.9rem;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+		}
+
+		.cta-section {
+			background: linear-gradient(135deg, #0066cc 0%, #764ba2 100%);
+			color: white;
+			border-radius: 12px;
+			padding: 40px;
+			text-align: center;
+			margin: 40px 0;
+		}
+
+		.cta-section h3 {
+			margin-bottom: 15px;
+			font-size: 1.8rem;
+		}
+
+		.cta-section p {
+			margin-bottom: 25px;
+			opacity: 0.9;
+			font-size: 1.1rem;
+		}
+
+		.btn-cta {
+			background: rgba(255, 255, 255, 0.2);
+			color: white;
+			border: 2px solid white;
+			padding: 12px 30px;
+			border-radius: 25px;
+			text-decoration: none;
+			font-weight: 500;
+			margin: 0 10px;
+			display: inline-block;
+			transition: all 0.3s ease;
+		}
+
+		.btn-cta:hover {
+			background: white;
+			color: #0066cc;
+			text-decoration: none;
+		}
+
+		.warning-section {
+			background: #fff3cd;
+			border: 1px solid #ffeaa7;
+			border-left: 4px solid #f39c12;
+			border-radius: 8px;
+			padding: 20px;
+			margin: 30px 0;
+		}
+
+		.warning-section h4 {
+			color: #856404;
+			margin-bottom: 10px;
+			font-size: 1.2rem;
+		}
+
+		.warning-section p {
+			color: #856404;
+			margin: 0;
+			line-height: 1.6;
+		}
+
+		.symptoms-list {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 15px;
+			margin: 20px 0;
+		}
+
+		.symptom-item {
+			background: #e8f4fd;
+			padding: 15px;
+			border-radius: 8px;
+			border-left: 3px solid #0066cc;
+		}
+
+		.symptom-item strong {
+			color: #0066cc;
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		@media (max-width: 768px) {
+			.hero-title {
+				font-size: 2.2rem;
+			}
+
+			.hero-subtitle {
+				font-size: 1rem;
+			}
+
+			.info-cards {
+				grid-template-columns: 1fr;
+				gap: 20px;
+			}
+
+			.stats-grid {
+				grid-template-columns: repeat(2, 1fr);
+			}
+
+			.btn-cta {
+				display: block;
+				margin: 10px 0;
+			}
+		}
+	</style>
 </head>
+
 <body>
 	<div layout:fragment="body">
+		<main th:fragment="main">
+			<!-- Hero Section -->
+			<section class="hero-section">
+				<div class="hero-content">
+					<h1 class="hero-title">Retinoblastoma</h1>
+					<p class="hero-subtitle">
+						Centro de informações, apoio e recursos para famílias afetadas pelo retinoblastoma -
+						um câncer ocular raro que afeta principalmente crianças pequenas.
+					</p>
+				</div>
+			</section>
 
-		<div class="container-fluid">
-			<h1 class="mt-4">Home</h1>
-			<ol class="breadcrumb mb-4">
-				<li class="breadcrumb-item active">Home</li>
-			</ol>
+			<div class="container-fluid">
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item active">Home</li>
+				</ol>
 
-			<div class="text-center">
-				<h2>Bem vindo =)</h2>
+				<!-- Aviso Importante -->
+				<div class="warning-section">
+					<h4>⚠️ Aviso Médico Importante</h4>
+					<p>
+						<strong>As informações aqui fornecidas são apenas educacionais.</strong>
+						Este site não substitui consulta médica profissional. Sempre procure orientação de um
+						oftalmologista
+						especializado em caso de suspeita de retinoblastoma ou qualquer problema ocular.
+					</p>
+				</div>
 
+				<!-- O que é o Retinoblastoma -->
+				<div class="info-cards">
+					<div class="info-card">
+						<div class="icon">👁️</div>
+						<h3>O que é Retinoblastoma?</h3>
+						<p>
+							O retinoblastoma é um tumor maligno raro que se desenvolve na retina, a camada sensível à
+							luz
+							na parte posterior do olho. É o câncer ocular mais comum em crianças, afetando
+							principalmente
+							bebês e crianças pequenas com menos de 5 anos de idade.
+						</p>
+						<p>
+							Pode ocorrer em um olho (unilateral) ou em ambos os olhos (bilateral), sendo que os casos
+							bilaterais geralmente têm origem genética hereditária.
+						</p>
+					</div>
+
+					<div class="info-card">
+						<div class="icon">🔬</div>
+						<h3>Causas e Genética</h3>
+						<p>
+							O retinoblastoma é causado por mutações no gene RB1, localizado no cromossomo 13.
+							Aproximadamente 40% dos casos são hereditários, enquanto 60% são esporádicos (não
+							hereditários).
+						</p>
+						<p>
+							Nos casos hereditários, existe 50% de chance de transmissão para os filhos.
+							O aconselhamento genético é fundamental para famílias afetadas.
+						</p>
+					</div>
+
+					<div class="info-card">
+						<div class="icon">⚕️</div>
+						<h3>Tratamento e Prognóstico</h3>
+						<p>
+							O tratamento varia conforme o estágio da doença e pode incluir quimioterapia,
+							radioterapia, laser, crioterapia ou, em casos avançados, enucleação (remoção do olho).
+						</p>
+						<p>
+							<strong>Diagnóstico precoce é fundamental!</strong> Com detecção e tratamento adequados,
+							a taxa de cura ultrapassa 95% nos países desenvolvidos.
+						</p>
+					</div>
+				</div>
+
+				<!-- Sintomas -->
+				<div class="info-card" style="margin: 40px 0;">
+					<h3>🚨 Principais Sintomas - Fique Atento!</h3>
+					<p style="margin-bottom: 25px;">
+						Reconhecer os sinais precocemente pode salvar vidas. Procure um oftalmologista imediatamente
+						se notar qualquer um desses sintomas:
+					</p>
+
+					<div class="symptoms-list">
+						<div class="symptom-item">
+							<strong>Leucocoria (reflexo do olho de gato)</strong>
+							Pupila branca ou amarelada ao invés do reflexo vermelho normal em fotografias com flash
+						</div>
+						<div class="symptom-item">
+							<strong>Estrabismo</strong>
+							Olhos que não se alinham ou "olho vesgo" que surge repentinamente
+						</div>
+						<div class="symptom-item">
+							<strong>Diminuição da visão</strong>
+							Perda visual em um ou ambos os olhos (mais difícil de detectar em bebês)
+						</div>
+						<div class="symptom-item">
+							<strong>Olho vermelho e dolorido</strong>
+							Inflamação persistente sem causa aparente
+						</div>
+						<div class="symptom-item">
+							<strong>Diferença no tamanho das pupilas</strong>
+							Uma pupila maior que a outra (anisocoria)
+						</div>
+						<div class="symptom-item">
+							<strong>Aumento do globo ocular</strong>
+							Olho que parece maior ou mais proeminente
+						</div>
+					</div>
+				</div>
+
+				<!-- Estatísticas -->
+				<div class="stats-section">
+					<h3>Dados Importantes sobre Retinoblastoma</h3>
+					<div class="stats-grid">
+						<div class="stat-item">
+							<span class="stat-number">1:15.000</span>
+							<div class="stat-label">Incidência em nascidos vivos</div>
+						</div>
+						<div class="stat-item">
+							<span class="stat-number">95%+</span>
+							<div class="stat-label">Taxa de cura com diagnóstico precoce</div>
+						</div>
+						<div class="stat-item">
+							<span class="stat-number">&lt;5 anos</span>
+							<div class="stat-label">Idade mais comum de diagnóstico</div>
+						</div>
+						<div class="stat-item">
+							<span class="stat-number">40%</span>
+							<div class="stat-label">Casos hereditários</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Call to Action -->
+				<div class="cta-section">
+					<h3>Precisa de Ajuda ou Informações?</h3>
+					<p>
+						Nossa plataforma conecta famílias, compartilha experiências e fornece recursos educacionais
+						sobre retinoblastoma. Você não está sozinho nesta jornada.
+					</p>
+					<a href="/forum/topics" class="btn-cta">💬 Participar do Fórum</a>
+					<a href="/recursos" class="btn-cta">📚 Ver Recursos</a>
+					<a href="/contato" class="btn-cta">📞 Entre em Contato</a>
+				</div>
+
+				<!-- Teste do Reflexo Vermelho -->
+				<div class="info-card"
+					style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left-color: #4caf50;">
+					<h3>📸 Teste Simples: Reflexo Vermelho em Fotos</h3>
+					<p>
+						<strong>Você sabia que fotos com flash podem ajudar na detecção precoce?</strong>
+					</p>
+					<p>
+						Em fotos normais com flash, os olhos aparecem com reflexo avermelhado.
+						Se um olho aparecer branco, amarelado ou com reflexo diferente do outro,
+						<strong>procure um oftalmologista imediatamente</strong>.
+					</p>
+					<p style="margin: 0;">
+						<em>Dica: Tire fotos regulares de seus filhos pequenos e observe os reflexos oculares!</em>
+					</p>
+				</div>
 			</div>
-
-		</div>
+		</main>
 	</div>
 </body>
+
 </html>

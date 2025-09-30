@@ -31,7 +31,7 @@ public class UserRestController {
 		return ResponseEntity.created(null).body(userId);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/read-by-id/{id}")
 	public ResponseEntity<UserDto> readById(@PathVariable Long id) {
 		UserDto userDto = userServiceImpl.readById(id);
 		return ResponseEntity.ok(userDto);

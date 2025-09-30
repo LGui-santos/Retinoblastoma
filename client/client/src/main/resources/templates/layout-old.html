@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta charset="UTF-8">
+	<title>Retinoblastoma</title>
+
+	<script src="/resources/js/jquery/jquery-3.4.1.min.js"></script>
+
+	<link href="/resources/css/styles.css" rel="stylesheet" />
+	<link href="/resources/css/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+	<script src="/resources/js/font-awesome/all.min.js"></script>
+
+</head>
+
+<body class="sb-nav-fixed">
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<a class="navbar-brand" th:href="@{/}">Retinoblastoma</a>
+		<button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
+			<i class="fas fa-bars"></i>
+		</button>
+
+		<!-- Botões de cadastro -->
+		<ul class="navbar-nav ml-3">
+		    <li class="nav-item" sec:authorize="!isAuthenticated()">
+		        <a class="btn btn-outline-light btn-sm mr-2" th:href="@{/account/register}">
+		            Cadastro Usuário
+		        </a>
+		    </li>
+		    <li class="nav-item" sec:authorize="!isAuthenticated()">
+		        <a class="btn btn-outline-info btn-sm" th:href="@{/account/register-doctor}">
+		            Cadastro Médico
+		        </a>
+		    </li>
+		</ul>
+
+		<!-- Navbar Search-->
+		<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+			<div class="input-group">
+<!--				<input class="form-control" type="text" placeholder="Procurar por..." aria-label="Search"-->
+<!--					aria-describedby="basic-addon2" />-->
+				<div class="input-group-append">
+<!--					<button class="btn btn-primary" type="button">-->
+<!--						<i class="fas fa-search"></i>-->
+<!--					</button>-->
+				</div>
+			</div>
+		</form>
+
+		<!-- Navbar-->
+		<ul class="navbar-nav ml-auto ml-md-0">
+		    <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle d-flex align-items-center" 
+		           id="userDropdown" href="#" role="button" 
+		           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		           
+		            <!-- Avatar do usuário logado -->
+		            <div sec:authorize="isAuthenticated()" class="d-flex align-items-center">
+		                <div class="user-avatar me-2">
+		                    <!-- Carinha sem face -->
+		                    <i class="far fa-user-circle fa-lg"></i>
+		                </div>
+		                <span class="d-none d-md-inline text-light" 
+		                      th:text="${#authentication.principal.usuario.name}">
+		                    Nome do Usuário
+		                </span>
+		            </div>
+		            
+		            <!-- Ícone para usuário não logado -->
+		            <div sec:authorize="!isAuthenticated()" class="d-flex align-items-center">
+		                <div class="user-avatar me-2">
+		                    <i class="far fa-user fa-lg"></i>
+		                </div>
+		                <span class="d-none d-md-inline text-light">Entrar</span>
+		            </div>
+		        </a>
+		        
+		        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+		            <!-- Menu para usuário logado -->
+		            <div sec:authorize="isAuthenticated()">
+		                <div class="dropdown-header d-flex align-items-center">
+		                    <i class="far fa-user-circle fa-2x me-2"></i>
+		                    <div>
+		                        <div class="fw-bold" th:text="${#authentication.principal.usuario.name}">
+		                            Nome do Usuário
+		                        </div>
+		                        <small class="text-muted" th:text="${#authentication.principal.usuario.email}">
+		                            email@exemplo.com
+		                        </small>
+		                    </div>
+		                </div>
+		                <div class="dropdown-divider"></div>
+		                <a class="dropdown-item" th:href="@{/user/my-profile}">
+		                    <i class="fas fa-user-edit me-2"></i>Meu Perfil
+		                </a>
+		                <div class="dropdown-divider"></div>
+		                <form th:action="@{/logout}" method="post" style="display:inline;">
+		                    <button type="submit" class="dropdown-item text-danger">
+		                        <i class="fas fa-sign-out-alt me-2"></i>Sair
+		                    </button>
+		                </form>
+		            </div>
+
+		            <!-- Menu para usuário não logado -->
+		            <div sec:authorize="!isAuthenticated()">
+		                <a class="dropdown-item" th:href="@{/account/login-page}">
+		                    <i class="fas fa-sign-in-alt me-2"></i>Fazer Login
+		                </a>
+		            </div>
+		        </div>
+		    </li>
+		</ul>
+	</nav>
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_nav">
+			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<div class="sb-sidenav-menu-heading">Menu</div>
+
+						<a class="nav-link" th:href="@{/}">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> Home
+						</a> <a class="nav-link" th:href="@{/forum/topics}">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> Fórum
+						</a>
+					</div>
+				</div>
+		</div>
+		<div class="sb-sidenav-footer">
+			<div class="small">Logado como:</div>
+			Tiburssinho
+		</div>
+		</nav>
+	</div>
+
+	<div id="layoutSidenav_content">
+		<main>
+			<div layout:fragment="body"></div>
+		</main>
+		<footer class="py-4 bg-light mt-auto">
+			<div class="container-fluid">
+				<div class="d-flex align-items-center justify-content-between small">
+					<div class="text-muted">Copyright &copy; FAI - 2025</div>
+					<div>
+						<a href="#">Política de privacidade</a> &middot; <a href="#">Termos
+							&amp; Condições</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	</div>
+	<script src="/resources/js/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="/resources/js/scripts.js"></script>
+<!--	<script src="/resources/js/datatable/jquery.dataTables.min.js"></script>-->
+<!--	<script src="/resources/js/datatable/dataTables.bootstrap4.min.js"></script>-->
+<!--	<script src="/resources/assets/demo/datatables-init.js"></script>-->
+</body>
+
+</html>

@@ -41,8 +41,8 @@
 							</div>
 							<div class="mb-2">
 								<p class="text-primary text-center"
-									th:text="${user.nomeUsuario}">Tiburssinho</p>
-								<p class="text-muted text-center" th:text="${user.tipo}">Desenvolvedor</p>
+									th:text="${userDto.name}">Tiburssinho</p>
+								<p class="text-muted text-center" th:text="${userDto.role}">Desenvolvedor</p>
 							</div>
 						</div>
 					</div>
@@ -54,18 +54,18 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-sm-3">Nome</div>
-								<div class="col-sm-9" th:text="${user.nomeCompleto}">Tiburssinho
+								<div class="col-sm-9" th:text="${userDto.name}">Tiburssinho
 									Tiburssius</div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col-sm-3">Email</div>
-								<div class="col-sm-9" th:text="${user.email}">tiburssinho@gmail.com</div>
+								<div class="col-sm-9" th:text="${userDto.email}">tiburssinho@gmail.com</div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col-sm-3">Tipo</div>
-								<div class="col-sm-9" th:text="${user.tipo}">ADMIN</div>
+								<div class="col-sm-9" th:text="${userDto.role}">ADMIN</div>
 							</div>
 						</div>
 					</div>
@@ -73,7 +73,7 @@
 					<div class="mb-2">
 						<!-- 						<button class="btn btn-primary col-12">Editar</button> -->
 
-						<a th:href="@{/user/edit/{id} (id=${user.id})   }"
+						<a th:href="@{/user/edit/{id} (id=${userDto.id})   }"
 							class="btn btn-primary col-12">Editar</a>
 
 
