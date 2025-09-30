@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<body>
+	<div layout:fragment="body">
+		<div class="container-fluid">
+			<h1 class="mt-4">Final Fantasy XIV - Shadowbringers</h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item">Home</li>
+				<li class="breadcrumb-item">Lista de jogos</li>
+				<li class="breadcrumb-item active">Detalhes</li>
+			</ol>
+
+			<div class="row">
+
+				<div class="col-lg-7 col-md-8 col-12 h-100">
+
+					<img src="../resources/assets/img/ffxiv/capa.jpeg"
+						class="img-fluid col-12" />
+					<div class=""></div>
+					<div class="col-12 mt-2">
+
+						<div class="float-left">
+							<span class="fa fa-star star-checked"></span> <span
+								class="fa fa-star star-checked"></span> <span
+								class="fa fa-star star-checked"></span> <span
+								class="fa fa-star star-checked"></span> <span class="fa fa-star"></span>
+						</div>
+
+						<div class="float-right">
+							<button class="btn btn-primary">
+								<i class="fa fa-thumbs-up primary"></i>
+							</button>
+
+							<button class="btn btn-primary ml-2">
+								<i class="fa fa-check primary"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-5 col-md-4 col-12">
+
+					<div class="d-block d-sm-block d-md-none">
+						<div class="mt-2"></div>
+					</div>
+
+					<div class="">
+						<div id="carousel-parent" class="carousel slide carousel-fade"
+							data-ride="carousel" data-interval="1500">
+							<!-- indicadores -->
+							<ol class="carousel-indicators">
+								<li data-target="#carousel-parent" class="active"></li>
+								<li data-target="#carousel-parent"></li>
+								<li data-target="#carousel-parent"></li>
+								<li data-target="#carousel-parent"></li>
+							</ol>
+
+							<!-- conteudo -->
+							<div class="carousel-inner">
+								<!-- item-slide do carrosel -->
+								<div class="carousel-item active">
+									<img src="../resources/assets/img/ffxiv/img-1.jpg"
+										class="img-fluid d-block w-100">
+								</div>
+								<div class="carousel-item">
+									<img src="../resources/assets/img/ffxiv/img-2.jpg"
+										class="img-fluid d-block w-100">
+								</div>
+								<div class="carousel-item">
+									<img src="../resources/assets/img/ffxiv/img-3.jpg"
+										class="img-fluid d-block w-100">
+								</div>
+								<div class="carousel-item">
+									<img src="../resources/assets/img/ffxiv/img-4.jpg"
+										class="img-fluid d-block w-100">
+								</div>
+							</div>
+
+							<!-- setas -->
+							<a href="#carousel-parent" class="carousel-control-prev"
+								role="button" data-slide="prev"> <span
+								class="carousel-control-prev-icon"></span>
+							</a> <a href="#carousel-parent" class="carousel-control-next"
+								role="button" data-slide="next"> <span
+								class="carousel-control-next-icon"></span>
+							</a>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">Final Fantasy XIV</li>
+								<li class="list-group-item">Square Enix Co. Ltd.</li>
+								<li class="list-group-item">MMORPG</li>
+								<li class="list-group-item">Lançamento 28 jun 2019</li>
+								<li class="list-group-item">R$199,90</li>
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+			<div class="row mt-4">
+
+				<div class="col-12">
+					<nav>
+						<div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+							<a class="nav-item nav-link active" id="nav-home-tab"
+								data-toggle="tab" href="#description-tab" role="tab">Descrição</a>
+
+							<a class="nav-item nav-link" id="nav-profile-tab"
+								data-toggle="tab" href="#comments-tab" role="tab">Comentários</a>
+						</div>
+					</nav>
+				</div>
+				<div class="col-12">
+					<div class="tab-content">
+
+						<div class="mt-2 tab-pane fade show active" id="description-tab">
+							<p>Embarque na nova saga do aclamado jogo FINAL FANTASY® XIV
+								Online com o novo e lendário pacote de expansão SHADOWBRINGERS!
+
+								Novos jobs, incluindo Gunbreaker Nova raça jogável: Viera Limite
+								de nível aumentado de 70 para 80 Explore novas e grandes áreas,
+								como Rak’tika Greatwood, Amh Araeng e Il Mheg. Novos primals,
+								como Pixie King Titania Novas tribos: fadas, Nu Mou, anões. Uma
+								gama de novas masmorras para explorar Novas incursões
+								desafiadoras para 8 jogadores Uma nova e emocionante série de
+								incursões de alianças YoRHa: Dark Apocalypse Explore as
+								masmorras que aparecem na história principal de Shadowbringers
+								ao lado de NPCs famosos com o novo sistema Trust.</p>
+						</div>
+						<div class="tab-pane fade" id="comments-tab">
+							<div class="row bootstrap snippets">
+								<div class="col-12">
+									<div class="comment-wrapper">
+										<div class="panel panel-info">
+
+											<div class="panel-body">
+												<textarea class="form-control"
+													placeholder="escreva seu comentário!" rows="3"></textarea>
+												<br>
+												<button type="button" class="btn btn-info float-right">Post</button>
+												<div class="clearfix"></div>
+												<hr>
+												<ul class="media-list">
+													<li class="media"><a href="#" class="float-left">
+															<img src="https://bootdey.com/img/Content/user_1.jpg"
+															alt="" class="img-circle">
+													</a>
+														<div class="media-body">
+															<span class="text-muted float-right"> <small
+																class="text-muted">30 min atrás</small>
+															</span> <strong class="text-success">@Tiburssinho</strong>
+															<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+																elit. Lorem ipsum dolor sit amet.</p>
+														</div></li>
+													<li class="media"><a href="#" class="float-left">
+															<img src="https://bootdey.com/img/Content/user_2.jpg"
+															alt="" class="img-circle">
+													</a>
+														<div class="media-body">
+															<span class="text-muted float-right"> <small
+																class="text-muted">30 min ago</small>
+															</span> <strong class="text-success">@Barizon</strong>
+															<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+																elit. Lorem ipsum dolor adipiscing elit.</p>
+														</div></li>
+													<li class="media"><a href="#" class="float-left">
+															<img src="https://bootdey.com/img/Content/user_3.jpg"
+															alt="" class="img-circle">
+													</a>
+														<div class="media-body">
+															<span class="text-muted float-right"> <small
+																class="text-muted">30 min atrás</small>
+															</span> <strong class="text-success">@Aroldo</strong>
+															<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+																elit.</p>
+														</div></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+</body>
+
+</html>

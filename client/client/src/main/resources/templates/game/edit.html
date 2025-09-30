@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="body">
+
+		<div class="container-fluid">
+			<h1 class="mt-4">Editar jogo</h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item">Home</li>
+				<li class="breadcrumb-item">Lista de jogos</li>
+				<li class="breadcrumb-item active">Editar</li>
+			</ol>
+
+			<div class="row">
+
+				<div class="mb-2 col-12">
+
+					<div class="mb-2 card">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-sm-3">
+									<label for="nome">Nome</label>
+								</div>
+								<div class="col-sm-9">
+									<input type="text" id="nome" class="form-control"
+										value="Jogo X">
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<label for="desenvolvidoPor">Desenvolvido por</label>
+								</div>
+								<div class="col-sm-9">
+									<input type="text" id="desenvolvidoPor" class="form-control"
+										value="Empresa X">
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<label for="genero">Gênero</label>
+								</div>
+								<div class="col-sm-9">
+
+									<select class="form-control" id="genero">
+										<option selected>Selecione...</option>
+										<option>MMORPG</option>
+										<option>Combate</option>
+										<option>Ação</option>
+										<option>Corrida</option>
+									</select>
+
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<label for="plataforma">Plataforma</label>
+								</div>
+								<div class="col-sm-9">
+									<select class="form-control" id="plataforma">
+										<option selected>Selecione...</option>
+										<option>PS4</option>
+										<option>XBox One</option>
+										<option>PC</option>
+									</select>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<label for="dataLancamento">Data lançamento</label>
+								</div>
+								<div class="col-sm-9">
+									<input type="date" id="dataLancamento" class="form-control"
+										value="20/01/2020">
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<label for="descricao">Descrição</label>
+								</div>
+								<div class="col-sm-9">
+									<textarea class="form-control" id="descricao" rows="3"></textarea>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<label for="imagemPrincipal">Imagem principal</label>
+								</div>
+								<div class="col-sm-9">
+									<div class="custom-file">
+										<input type="file" class="custom-file-input"
+											id="imagemPrincipal"> <label
+											class="custom-file-label" for="imagemPrincipal">Escolha
+											a imagem</label>
+									</div>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<label for="imagemPrincipal">Imagens do carrossel</label>
+								</div>
+
+								<div class="col-sm-9">
+									<div class="row">
+
+										<div class="col-sm-12 col-md-6 col-lg-4 mb-2">
+											<div class="card">
+												<img class="card-img-top"
+													src="https://via.placeholder.com/200/200">
+												<div class="card-body">
+													<h5 class="card-title text-center">Imagem 1</h5>
+
+													<div class="custom-file">
+														<input type="file" class="custom-file-input"
+															id="imagemCarrossel01"> <label
+															class="custom-file-label" for="imagemCarrossel01">Buscar</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-12 col-md-6 col-lg-4 mb-2">
+											<div class="card">
+												<img class="card-img-top"
+													src="https://via.placeholder.com/200/200">
+												<div class="card-body">
+													<h5 class="card-title text-center">Imagem 2</h5>
+
+													<div class="custom-file">
+														<input type="file" class="custom-file-input"
+															id="imagemCarrossel02"> <label
+															class="custom-file-label" for="imagemCarrossel02">Buscar</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-12 col-md-6 col-lg-4 mb-2">
+											<div class="card">
+												<img class="card-img-top"
+													src="https://via.placeholder.com/200/200">
+												<div class="card-body">
+													<h5 class="card-title text-center">Imagem 3</h5>
+
+													<div class="custom-file">
+														<input type="file" class="custom-file-input"
+															id="imagemCarrossel03" lang="pt"> <label
+															class="custom-file-label" for="imagemCarrossel03">Buscar</label>
+													</div>
+
+
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="mb-2">
+						<button class="btn btn-primary col-12">Criar</button>
+					</div>
+
+				</div>
+
+
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>

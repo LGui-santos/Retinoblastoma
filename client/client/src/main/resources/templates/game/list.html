@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="body">
+		<div class="container-fluid">
+			<h1 class="mt-4">Usuários</h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item">Home</li>
+				<li class="breadcrumb-item active">Lista de usuários</li>
+			</ol>
+
+			<div class="card mb-4">
+				<div class="card-header">
+					<i class="fas fa-table mr-1"></i>Usuários cadastrados
+				</div>
+
+				<div class="card-body">
+
+					<div class="row float-right">
+						<a th:href="@{/game/report/read-all}" target="_blanck" class="btn btn-primary">Gerar
+							relatório</a>
+					</div>
+
+
+					<div class="table-responsive">
+
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Genero</th>
+									<th>Nome</th>
+									<th>Descricao</th>
+									<th></th>
+								</tr>
+							</thead>
+<!-- 							<tfoot> -->
+<!-- 								<tr> -->
+<!-- 									<th>Id</th> -->
+<!-- 									<th>Nome</th> -->
+<!-- 									<th>Email</th> -->
+<!-- 									<th></th> -->
+<!-- 								</tr> -->
+<!-- 							</tfoot> -->
+							<tbody>
+
+								<tr th:each="jogo : ${jogos}">
+									<td th:text="${jogo.id}">1</td>
+									<td th:text="${jogo.Genero}"></td>
+									<td th:text="${jogo.Nome}"></td>
+									<td th:text="${jogo.Descricao}"></td>
+									<td>
+										<div class="row">
+											<div class="col-4">
+												<a class="btn btn-primary"
+													th:href="@{/game/detail/{id} (id=${jogo.id})  }"
+													role="button"> <i class="fas fa-address-card"></i>
+												</a>
+
+											</div>
+											<div class="col-4">
+												<button class="btn btn-warning">
+													<i class="fas fa-lock"></i>
+												</button>
+											</div>
+											<div class="col-4">
+												<button class="btn btn-danger">
+													<i class="fas fa-user-alt-slash"></i>
+												</button>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 	<div layout:fragment="body"> -->
+
+<!-- 		<div class="container-fluid"> -->
+<!-- 			<h1 class="mt-4">Lista de jogos</h1> -->
+<!-- 			<ol class="breadcrumb mb-4"> -->
+<!-- 				<li class="breadcrumb-item">Home</li> -->
+<!-- 				<li class="breadcrumb-item active">Lista de jogos</li> -->
+<!-- 			</ol> -->
+
+
+<!-- 			<div class="row"> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Final Fantasy XIV: -->
+<!-- 							Shadowbringers</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/ffxiv/capa.jpeg" class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$199,90</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Assassin's Creed - -->
+<!-- 							Unity</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/assassins-creed/capa.jpeg" -->
+<!-- 								class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$29,99</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Dragon Ball Z</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/dbz/capa.jpeg" class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$429,99</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Horizon Zero Dawn</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/horizon-zero-dawn/capa.jpeg" -->
+<!-- 								class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$15,45</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Resident Evil 7</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/re-7/capa.jpeg" class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$74,99</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Dragon Ball Z</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/dbz/capa.jpeg" class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$429,99</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Assassin's Creed - -->
+<!-- 							Unity</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/assassins-creed/capa.jpeg" -->
+<!-- 								class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$29,99</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Final Fantasy XIV: -->
+<!-- 							Shadowbringers</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/ffxiv/capa.jpeg" class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$199,90</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Assassin's Creed - -->
+<!-- 							Unity</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/assassins-creed/capa.jpeg" -->
+<!-- 								class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$29,99</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Resident Evil 7</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/re-7/capa.jpeg" class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$74,99</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Horizon Zero Dawn</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/horizon-zero-dawn/capa.jpeg" -->
+<!-- 								class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$15,45</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Dragon Ball Z</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/dbz/capa.jpeg" class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$429,99</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Horizon Zero Dawn</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/horizon-zero-dawn/capa.jpeg" -->
+<!-- 								class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$15,45</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Assassin's Creed - -->
+<!-- 							Unity</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/assassins-creed/capa.jpeg" -->
+<!-- 								class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$29,99</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="game-item col-md-3 col-sm-4 col-6 mt-2"> -->
+<!-- 					<div class="h-100 card bg-dark text-light"> -->
+<!-- 						<div class="card-title text-center mt-1">Resident Evil 7</div> -->
+<!-- 						<div class="card-body text-center no-padding"> -->
+<!-- 							<a href="../game/game-detail.html"> <img -->
+<!-- 								src="../resources/assets/img/re-7/capa.jpeg" class="img-fluid" /> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="card-footer d-flex justify-content-between"> -->
+<!-- 							<a class="small text-white" href="#">R$74,99</a> <a -->
+<!-- 								class="small text-white" href="#">10</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-comment"></i> -->
+<!-- 							</div> -->
+
+<!-- 							<a class="small text-white" href="#">5</a> -->
+<!-- 							<div class="small text-white"> -->
+<!-- 								<i class="fas fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 			</div> -->
+
+<!-- 		</div> -->
+<!-- 	</div> -->
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="body">
+
+		<div class="container-fluid">
+			<h1 class="mt-4">Perfil</h1>
+			<ol class="breadcrumb mb-4">
+				<li class="breadcrumb-item">Home</li>
+				<li class="breadcrumb-item active">Perfil</li>
+			</ol>
+
+
+			<div class="row">
+
+				<div class="mb-2 col-12 col-sm-5">
+					<div class="card">
+						<div class="card-body">
+							<div class="mb-3 text-center">
+								
+								
+<!-- 								<img src="../resources/assets/img/avatar.jpg" width="200" -->
+<!-- 									class="rounded-circle img-fluid" /> -->
+									
+									<div th:if="${avatar == null}">
+									
+										<img src="https://via.placeholder.com/200" width="200" class="rounded-circle img-fluid" />
+									
+									</div>
+									
+									<div th:if="${avatar != null}">
+									
+										<img th:src="@{'data:image/png;base64,' + ${avatar}}" width="200" class="rounded-circle img-fluid" />
+										
+									</div>
+									
+									
+							</div>
+							<div class="mb-2">
+							
+								<div class="col-12">
+									<p th:text="${message}" th:if="${message != null}" class="alert alert-primary" />
+								</div>
+							
+							
+							
+								<form th:action="@{/user/upload-file}" method="POST" enctype="multipart/form-data">
+								
+									<input type="file" name="file" class="form-control-file mb-1" accept="image/png,image/jpeg">
+								
+									<input hidden name="userId" th:value="${user.id}">
+								
+								
+									<button type="submit" class="btn btn-primary col-12">Trocar</button>
+								</form>
+							
+								
+								
+								
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="mb-2 col-12 col-sm-7">
+
+					<form th:action="@{/user/update}" method="POST" th:object="${user}">
+
+						<div class="mb-2 card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-3">Nome</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control"
+											th:field="${user.nomeCompleto}">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Email</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control"
+											th:field="${user.email}">
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-sm-3">Idade</div>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" value="-">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="mb-2">
+							<button class="btn btn-primary col-12" type="submit">Atualizar</button>
+
+							<input type="hidden" th:field="${user.id}">
+
+						</div>
+
+					</form>
+
+
+
+
+				</div>
+
+
+
+			</div>
+
+
+
+		</div>
+	</div>
+</body>
+</html>
