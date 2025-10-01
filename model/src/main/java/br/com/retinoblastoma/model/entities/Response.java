@@ -34,22 +34,19 @@ public class Response {
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "topic_id")
+    @ManyToOne
     private Topic topic;
     
-    // Mapeamento da data
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
-    @Column(name = "creation_date") // Garante que creation_date seja mapeado corretamente
+    @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
-    // Mapeamento da imagem (adicionado nome da coluna e tipo correto)
-    @Lob // Adicionado @Lob para grandes objetos
-    @Basic(fetch = FetchType.EAGER) // Garante o carregamento
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
     @Column(name = "image", columnDefinition = "BYTEA")
     private byte[] image;
 

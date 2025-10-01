@@ -42,12 +42,12 @@ public class Topic {
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User author;
     
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
-    @Column(name = "creation_date") // Mapeamento da coluna de data
+    @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
