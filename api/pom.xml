@@ -125,7 +125,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
                     <finalName>${project.artifactId}</finalName>
-                    <classifier>exec</classifier>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
