@@ -17,6 +17,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,7 +31,8 @@ import lombok.NoArgsConstructor;
 public class Topic {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "topic_seq")
+	@SequenceGenerator(name = "topic_seq", sequenceName = "topic_id_seq", allocationSize = 1)
 	private Long id;
 	private String title;
 	@Lob

@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +25,8 @@ import lombok.NoArgsConstructor;
 public class Response {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "topic_seq")
+	@SequenceGenerator(name = "topic_seq", sequenceName = "topic_id_seq", allocationSize = 1)
 	private Long id;
 	@Lob
 	@Column(columnDefinition = "TEXT")
