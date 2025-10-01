@@ -195,6 +195,13 @@ public class ForumController {
 			}
 		}
 
+        if (imageData.length >= 12) {
+            String avifHeader = new String(imageData, 4, 8, StandardCharsets.US_ASCII);
+            if (avifHeader.equals("ftypavif") || avifHeader.equals("ftypmif1")) {
+                return "image/avif"; // Use o MIME Type correto!
+            }
+        }
+
 		return "image/jpeg"; // fallback
 	}
 
