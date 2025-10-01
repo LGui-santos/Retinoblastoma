@@ -123,16 +123,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-                	<execution>
-	                    <goals>
-	                        <goal>repackage</goal>
-	                    </goals>
-	                </execution>
-	            </executions>
 				<configuration>
-                        <finalName>${project.artifactId}</finalName>
-                        <classifier>exec</classifier>
+                    <finalName>${project.artifactId}</finalName>
+                    <classifier>exec</classifier>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
