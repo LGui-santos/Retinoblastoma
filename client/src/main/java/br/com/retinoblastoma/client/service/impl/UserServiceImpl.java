@@ -3,6 +3,7 @@ package br.com.retinoblastoma.client.service.impl;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,11 +20,14 @@ import br.com.retinoblastoma.model.dto.UserDto;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Value("${api.base.url}")
+    private String apiBaseUrl;
+
 	@Override
 	public List<UserDto> readAll() {
 		List<UserDto> response = null;
 
-		String endpoint = "http://localhost:8082/api/v1/user/read-all";
+		String endpoint = apiBaseUrl + "/api/v1/user/read-all";
 
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -45,7 +49,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto readById(Long id) {
 		UserDto response = null;
 
-		String endpoint = "http://localhost:8082/api/v1/user/read-by-id/" + id;
+		String endpoint = apiBaseUrl + "/api/v1/user/read-by-id/" + id;
 
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -73,7 +77,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto validateUsernameAndPassword(String username, String password) {
 		UserDto user = null;
 
-		String endpoint = "http://localhost:8082/api/account/login";
+		String endpoint = apiBaseUrl + "/api/account/login";
 
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -103,7 +107,7 @@ public class UserServiceImpl implements UserService {
 	public Long create(UserDto entity) {
 
 		Long id = Long.valueOf(0);
-		String endpoint = "http://localhost:8082/api/v1/user/create";
+		String endpoint = apiBaseUrl + "/api/v1/user/create";
 		RestTemplate restTemplate = new RestTemplate();
 
 		try {

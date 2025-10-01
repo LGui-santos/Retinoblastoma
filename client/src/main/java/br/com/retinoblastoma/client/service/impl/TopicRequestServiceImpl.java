@@ -3,6 +3,7 @@ package br.com.retinoblastoma.client.service.impl;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,15 +21,13 @@ import br.com.retinoblastoma.model.dto.TopicResponseDto;
 @Service
 public class TopicRequestServiceImpl implements TopicRequestService {
 
+    @Value("${api.base.url}")
+    private String apiBaseUrl;
+
 	@Override
 	public List<TopicRequestDto> readAll() {
 		return null;
 	}
-
-//	@Override
-//	public Long create(TopicRequestDto entity) {
-//		return null;
-//	}
 
 	@Override
 	public TopicRequestDto readById(Long id) {
@@ -36,17 +35,11 @@ public class TopicRequestServiceImpl implements TopicRequestService {
 		return null;
 	}
 
-//	@Override
-//	public boolean update(TopicRequestDto entity) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-
 	@Override
 	public boolean deleteById(Long id) {
 		boolean response = false;
 
-		String endpoint = "http://localhost:8082/api/v1/topic/delete/" + id;
+		String endpoint = apiBaseUrl + "/api/v1/topic/delete/" + id;
 
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -70,7 +63,7 @@ public class TopicRequestServiceImpl implements TopicRequestService {
 
 	@Override
 	public TopicResponseDto createTopic(TopicRequestDto topicRequestDto, MultipartFile file) {
-		String endpoint = "http://localhost:8082/api/v1/topic/create-topic";
+		String endpoint = apiBaseUrl + "/api/v1/topic/create-topic";
 
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -94,35 +87,11 @@ public class TopicRequestServiceImpl implements TopicRequestService {
 		return null;
 	}
 
-//	@Override
-//	public TopicResponseDto createTopic(TopicRequestDto entity) {
-//		TopicResponseDto response = null;
-//		String endpoint = "http://localhost:8082/api/v1/topic/create-topic";
-//		RestTemplate restTemplate = new RestTemplate();
-//
-//		try {
-//			HttpHeaders headers = RestService.getRequestHeaders();
-//			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-//
-//			HttpEntity<TopicRequestDto> httpEntity = new HttpEntity<TopicRequestDto>(entity, headers);
-//
-//			ResponseEntity<TopicResponseDto> responseEntity = restTemplate
-//					.exchange(endpoint, HttpMethod.POST, httpEntity, TopicResponseDto.class);
-//
-//			response = responseEntity.getBody();
-////			id = Long.parseLong(response);
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
-//
-//		return response;
-//	}
-
 	@Override
 	public List<TopicResponseDto> readAllTopicResponseDto() {
 		List<TopicResponseDto> response = null;
 
-		String endpoint = "http://localhost:8082/api/v1/topic/read-all";
+		String endpoint = apiBaseUrl + "/api/v1/topic/read-all";
 
 		RestTemplate restTemplate = new RestTemplate();
 		try {

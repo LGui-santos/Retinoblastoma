@@ -3,6 +3,7 @@ package br.com.retinoblastoma.client.service.impl;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -22,21 +23,14 @@ import br.com.retinoblastoma.model.dto.UserDto;
 @Service
 public class TopicResponseServiceImpl implements TopicResponseService {
 
-//	@Override
-//	public List<TopicResponseDto> readAll() {
-//		return null;
-//	}
-
-//	@Override
-//	public Long create(TopicResponseDto entity) {
-//		return null;
-//	}
+    @Value("${api.base.url}")
+    private String apiBaseUrl;
 
 	@Override
 	public TopicResponseDto readById(Long id) {
 		TopicResponseDto response = null;
 
-		String endpoint = "http://localhost:8082/api/v1/topic/read-by-id/" + id;
+		String endpoint = apiBaseUrl + "/api/v1/topic/read-by-id/" + id;
 
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -63,7 +57,7 @@ public class TopicResponseServiceImpl implements TopicResponseService {
 	@Override
 	public boolean deleteById(Long id) {
 
-		String endpoint = "http://localhost:8082/api/response/delete/" + id;
+		String endpoint = apiBaseUrl + "/api/response/delete/" + id;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			// headers com token do usuário logado
@@ -83,7 +77,7 @@ public class TopicResponseServiceImpl implements TopicResponseService {
 	public List<TopicResponseDto> readAllTopicResponseDto() {
 		List<TopicResponseDto> response = null;
 
-		String endpoint = "http://localhost:8082/api/v1/topic/read-all";
+		String endpoint = apiBaseUrl + "/api/v1/topic/read-all";
 
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -111,7 +105,7 @@ public class TopicResponseServiceImpl implements TopicResponseService {
 
 		// seta userId e topicId no DTO antes de enviar
 		responseDto.setUserId(usuarioLogado.getId());
-		String endpoint = "http://localhost:8082/api/response";
+		String endpoint = apiBaseUrl + "/api/response";
 
 		RestTemplate restTemplate = new RestTemplate();
 
