@@ -6,9 +6,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -47,6 +49,9 @@ public class Topic {
 	@OrderBy("creationDate ASC") // ou DESC para mais recentes primeiro
 	private List<Response> responses = new ArrayList<>();
 
-	private byte[] image;
+    @Lob
+    @Basic(fetch = FetchType.EAGER) // <--- Garante que os bytes sejam carregados ANTES da sessão fechar
+    @Column(name = "image", columnDefinition = "BYTEA")
+    private byte[] image;
 
 }
