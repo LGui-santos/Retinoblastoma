@@ -80,7 +80,7 @@ public class ForumController {
 		if (topic.getImage() != null) {
 			String mimeType = getImageMimeType(topic.getImage());
 			String image = "data:" + mimeType + ";base64," + Base64.getEncoder().encodeToString(topic.getImage());
-            System.out.println(image);
+            System.out.println("Mostrando os bytes da imagem: " + image);
 			model.addAttribute("image", image);
 		}
 
