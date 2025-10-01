@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class Response {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Lob
 	@Column(columnDefinition = "TEXT")
