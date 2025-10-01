@@ -32,26 +32,31 @@ import lombok.NoArgsConstructor;
 public class Topic {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String title;
-	@Lob
-	@Column(columnDefinition = "TEXT")
-	private String content;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(name = "title")
+    private String title;
+    
+    @Lob
+    @Column(name = "content", columnDefinition = "TEXT")
+    private String content;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User author;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
-	private LocalDateTime creationDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User author;
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    @Column(name = "creation_date") // Mapeamento da coluna de data
+    private LocalDateTime creationDate;
 
-	@OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
-	@OrderBy("creationDate ASC") // ou DESC para mais recentes primeiro
-	private List<Response> responses = new ArrayList<>();
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
+    @OrderBy("creationDate ASC")
+    private List<Response> responses = new ArrayList<>();
 
     @Lob
-    @Basic(fetch = FetchType.EAGER) // <--- Garante que os bytes sejam carregados ANTES da sessão fechar
-    @Column(name = "image", columnDefinition = "BYTEA")
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "image", columnDefinition = "BYTEA") // Configuração do BLOB/BYTEA
     private byte[] image;
 
 }
