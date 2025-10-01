@@ -15,7 +15,6 @@ public class ResponseMapper {
 				.author(user)
 				.topic(topic)
 				.creationDate(LocalDateTime.now())
-				.image(topic.getImage())
 				.build();
 	}
 
@@ -26,7 +25,6 @@ public class ResponseMapper {
 				.userId(responseSaved.getAuthor().getId())
 				.topicId(responseSaved.getTopic().getId())
 				.creationDate(responseSaved.getCreationDate())
-				.image(responseSaved.getImage())
 				.build();
 	}
 }

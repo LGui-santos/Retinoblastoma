@@ -54,7 +54,7 @@ public class Topic {
     @OrderBy("creationDate ASC")
     private List<Response> responses = new ArrayList<>();
 
-    @Lob
+
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "image", columnDefinition = "BYTEA") // Configuração do BLOB/BYTEA
     private byte[] image;

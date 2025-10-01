@@ -45,9 +45,9 @@ public class Response {
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
-    @Lob
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "image", columnDefinition = "BYTEA")
-    private byte[] image;
+//    @Lob
+//    @Basic(fetch = FetchType.EAGER)
+//    @Column(name = "image", columnDefinition = "BYTEA")
+//    private byte[] image;
 
 }

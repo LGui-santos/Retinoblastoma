@@ -22,5 +22,4 @@ public class ResponseDto {
 	private String author;
 	private Long topicId;
 	private LocalDateTime creationDate;
-	private byte[] image;
 }

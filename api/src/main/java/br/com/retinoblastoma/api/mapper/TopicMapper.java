@@ -31,8 +31,7 @@ public class TopicMapper {
 						response.getAuthor().getId(),
 						response.getAuthor().getName(),
 						response.getTopic().getId(),
-						response.getCreationDate(),
-						response.getImage()))
+						response.getCreationDate()))
 				.toList() : List.of();
 
 		return TopicResponseDto.builder()
@@ -59,8 +58,7 @@ public class TopicMapper {
 							response.getAuthor().getId(),
 							response.getAuthor().getName(),
 							response.getTopic().getId(),
-							response.getCreationDate(),
-							response.getImage()))
+							response.getCreationDate()))
 					.toList() : List.of();
 
 			topicResponseDtos.add(TopicResponseDto.builder()
